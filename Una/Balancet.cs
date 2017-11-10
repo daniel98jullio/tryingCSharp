@@ -72,7 +72,7 @@ namespace ConsoleApplication1
 
 		static double readSpent()
 		{
-			Console.Write("|| Informe a quantidade gasta: R$");
+			Console.Write("|| Informe a quantidade: R$");
 			return double.Parse(Console.ReadLine());
 		}
 
@@ -80,9 +80,9 @@ namespace ConsoleApplication1
 		{
 			using (var outputFile = new StreamWriter("Debit.txt", true))
 			{
-				outputFile.WriteLine(value);
+				outputFile.Write(value);
 				outputFile.Write(' ');
-                outputFile.Write(date);
+                outputFile.WriteLine(date);
 			}
 		}
 
