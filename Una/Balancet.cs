@@ -40,6 +40,7 @@ namespace ConsoleApplication1
 		{
 			int tpOperac;
 			double vrSpend;
+            string date;
 
 			tpOperac = readTpOperac();
 
@@ -47,11 +48,13 @@ namespace ConsoleApplication1
 			{
 				case 0:
 					vrSpend = readSpent();
-					debitWriteNewLine(vrSpend);
+                    date = readDate();
+					debitWriteNewLine(vrSpend, date);
 					break;
 				case 1:
 					vrSpend = readSpent();
-					creditWriteNewLine(vrSpend);
+					date = readDate();
+					creditWriteNewLine(vrSpend, date);
 					break;
 				default:
 					Console.WriteLine("|| Opção de operação inválida");
@@ -73,19 +76,23 @@ namespace ConsoleApplication1
 			return double.Parse(Console.ReadLine());
 		}
 
-		static void debitWriteNewLine(double value)
+		static void debitWriteNewLine(double value, string date)
 		{
 			using (var outputFile = new StreamWriter("Debit.txt", true))
 			{
 				outputFile.WriteLine(value);
+				outputFile.Write(' ');
+                outputFile.Write(date);
 			}
 		}
 
-		static void creditWriteNewLine(double value)
+		static void creditWriteNewLine(double value, string date)
 		{
 			using (var outputFile = new StreamWriter("Credit.txt", true))
 			{
-				outputFile.WriteLine(value);
+				outputFile.Write(value);
+                outputFile.Write(' ');
+                outputFile.WriteLine(date);
 			}
 		}
 
@@ -97,7 +104,8 @@ namespace ConsoleApplication1
 				{
 					lines = sr.ReadToEnd();
 				}
-				return lines.Replace("\r", "").Split('\n');            
+
+				return lines.Replace("\r", "").Split('\n');   
             }
             return new string[0];
 		}
@@ -107,7 +115,8 @@ namespace ConsoleApplication1
 			double vrTot = 0;
 			for (int i = 0; i < lines.Length; i++)
 			{
-				double value = lines[i] != "" ? double.Parse(lines[i]) : 0;
+                var vrLine = lines[i].Split(' ')[0];
+				double value = lines[i] != "" ? double.Parse(vrLine) : 0;
 				vrTot += value;
 			}
 			return vrTot;
@@ -130,5 +139,10 @@ namespace ConsoleApplication1
 			Console.Write("|| Pressione qualquer tecla para sair...");
 			Console.ReadKey();
 		}
+
+        static string readDate() {
+            Console.Write("|| Informe a data da operação: ");
+            return Console.ReadLine();
+        }
 	}
 }
