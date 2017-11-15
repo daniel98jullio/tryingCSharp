@@ -8,7 +8,7 @@ namespace ConsoleApplication1
 {
 	class Una
 	{
-		static void Main(string[] args)
+		static void main(string[] args)
 		{
 			mediaIdadeFamilia();
 		}

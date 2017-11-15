@@ -9,7 +9,7 @@ namespace ConsoleApplication1
 {
 	class Balancet
 	{
-		static void Main(string[] args)
+		static void main(string[] args)
 		{
 			writeTitle();
 			keepWorking();

@@ -3,7 +3,7 @@ namespace Una
 {
     public class Repeticao
     {
-        static void Main(string[] args) {
+        static void main(string[] args) {
             q3();
         }
 
