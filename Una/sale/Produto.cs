@@ -12,6 +12,11 @@ namespace Una.sale
 
 		}
 
+		public void busca(string nome)
+		{
+
+		}
+
         public void insert(int codBar, string nome, string descricao, double vrUnit)
 		{
 

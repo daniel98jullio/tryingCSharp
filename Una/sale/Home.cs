@@ -6,5 +6,13 @@ namespace Una.sale
         public Home()
         {
         }
+
+        public void emitir_cupom_fiscal() {
+            
+        }
+
+        public void calcular_valor_desconto_forma_pagamento() {
+            
+        }
     }
 }
