@@ -7,23 +7,23 @@ namespace Una.sale
         {
         }
 
-        public void busca() {
+        public void busca(int codBar) {
             
         }
 
-        public void insert() {
+        public void insert(int codBar, double qt, double vrDesc) {
             
         }
 
-        public void update() {
+        public void update(double qt) {
             
         }
 
-        public void delete() {
+        public void delete(int id) {
 
 		}
 
-		public double calcular_valor_do_item(string codBar, double qtDesej)
+		public double calcular_valor_do_item(int codBar, double qtDesej)
 		{
 			return 0;
 		}

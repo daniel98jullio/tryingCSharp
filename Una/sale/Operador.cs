@@ -7,22 +7,22 @@ namespace Una.sale
         {
         }
 
-		public void busca()
+        public void busca(string nome)
 		{
 
 		}
 
-		public void insert()
+		public void insert(string nome, string senha)
 		{
 
 		}
 
-		public void update()
+		public void update(string senha)
 		{
 
 		}
 
-		public void delete()
+		public void delete(int id)
 		{
 
 		}

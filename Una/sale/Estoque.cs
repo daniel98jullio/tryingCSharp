@@ -7,24 +7,36 @@ namespace Una.sale
         {
         }
 
-		public void busca()
+		public void busca(int codBar, char idEntrSaid)
 		{
 
 		}
 
-		public void insert()
+		public void insert(int codBar, double quant, char idEntrSaid)
 		{
 
 		}
 
-		public void update()
+		public void update(int id, double quant)
 		{
 
 		}
 
-		public void delete()
+		public void delete(int id)
 		{
 
 		}
+
+        public bool Validar_Quantidade_Estoque(int codBar, double qtDesej) {
+            return false;
+        }
+
+        public void Atualizar_Estoque(int codBar, double qtProd) {
+            
+        }
+
+        public void relatorioQtEstoque() {
+            
+        }
     }
 }
