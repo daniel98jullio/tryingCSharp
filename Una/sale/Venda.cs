@@ -3,7 +3,7 @@ namespace Una.sale
 {
     public class Venda
     {
-        public Venda()
+        public Venda(Connection conn)
         {
         }
 

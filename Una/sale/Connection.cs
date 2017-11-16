@@ -4,21 +4,18 @@ using MySql.Data.MySqlClient;
 
 namespace Una.sale
 {
-    public class MysqlConnection
+    public class Connection
     {
         private const string CONNECTION = "server=localhost;database=PAH;uid=root;pwd=root";
         public MySqlConnection conn;
 
-        public MysqlConnection()
+        public Connection()
         {
-            this.openConnection();
-            this.insertExample();
-            this.closeConnection();
+            this.conn = new MySqlConnection(CONNECTION);
         }
 
         public void openConnection()
         {
-            this.conn = new MySqlConnection(CONNECTION);
             this.conn.Open();
         }
 

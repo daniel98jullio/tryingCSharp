@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,16 +40,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repeticao.cs" />
     <Compile Include="Balancet.cs" />
-    <Compile Include="sale\MysqlConnection.cs" />
+    <Compile Include="sale\Connection.cs" />
     <Compile Include="sale\Produto.cs" />
     <Compile Include="sale\Estoque.cs" />
     <Compile Include="sale\Operador.cs" />
     <Compile Include="sale\Venda.cs" />
     <Compile Include="sale\Home.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="sale\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="docs\MySqlTransaction.xml" />
     <None Include="docs\MySqlParameterCollection.xml" />

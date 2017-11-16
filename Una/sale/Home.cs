@@ -3,13 +3,17 @@ namespace Una.sale
 {
     public class Home
     {
-        public Home()
-        {
-        }
-
         static void Main(string[] args)
         {
-            MysqlConnection sql = new MysqlConnection();
+            Connection conn = new Connection();
+
+            Venda venda = new Venda(conn);
+            Estoque estoque = new Estoque(conn);
+            Operador operador = new Operador(conn);
+            Produto produto = new Produto(conn);
+
+            var a = estoque.busca();
+
             Console.ReadKey();
         }
 

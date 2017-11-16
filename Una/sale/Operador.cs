@@ -3,7 +3,7 @@ namespace Una.sale
 {
     public class Operador
     {
-        public Operador()
+        public Operador(Connection conn)
         {
         }
 
