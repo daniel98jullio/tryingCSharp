@@ -6,45 +6,52 @@ namespace Una.sale
 {
     public class MysqlConnection
     {
+        private const string CONNECTION = "server=localhost;database=PAH;uid=root;pwd=root";
+        public MySqlConnection conn;
+
         public MysqlConnection()
         {
-            var mDataSet = new DataSet();
-            MySqlConnection bdConn = new MySqlConnection("server=localhost;database=PAH;uid=root;pwd=root");
-            bdConn.Open();
+            this.openConnection();
+            this.insertExample();
+            this.closeConnection();
+        }
 
-            /*MySqlCommand a = bdConn.CreateCommand();
-            a.CommandText = "SELECT id FROM PRODUTO;";
+        public void openConnection()
+        {
+            this.conn = new MySqlConnection(CONNECTION);
+            this.conn.Open();
+        }
 
-            MySqlDataReader reader = a.ExecuteReader();
+        public void closeConnection()
+        {
+            this.conn.Close();
+            this.conn.Dispose();
+        }
 
-            while (reader.Read())
-            {
-                Console.WriteLine(reader.ToString());
-            }*/
-
+        public void selectExample()
+        {
             string stm = "SELECT * FROM PRODUTO";
-            MySqlCommand cmd = new MySqlCommand(stm, bdConn);
-            string version = Convert.ToString(cmd.ExecuteScalar());
-            Console.WriteLine("MySQL version : {0}", version);
-
-            /*MySqlDataReader rdr = cmd.ExecuteReader();
-            List<string>items=new List<string>();
-
+            MySqlCommand cmd = new MySqlCommand(stm, this.conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
                 Console.WriteLine(rdr.GetInt32(0) + " : "
                     + rdr.GetString(1) + " : "
                     + rdr.GetString(2) + " : "
-                    objReader.GetString(objReader.GetOrdinal("Column1"));
+                    + rdr.GetString(rdr.GetOrdinal("ID")) + " : "
                 );
-                list.add
-            }*/
+            }
+        }
 
-            var ds = new DataSet();
-            var da = new MySqlDataAdapter(stm, bdConn);
-            da.Fill(ds, "PRODUTO");
-            var c = ds.Tables["PRODUTO"];
-
+        public void insertExample()
+        {
+            string stm = "INSERT INTO PRODUTO (COD_BAR, NOME, VR_UNIT, DESCRICAO) VALUES (@0, @1, @2, @3)";
+            MySqlCommand cmd = new MySqlCommand(stm, this.conn);
+            cmd.Parameters.Add(new MySqlParameter("0", 5));
+            cmd.Parameters.Add(new MySqlParameter("1", "TESTE INSERT"));
+            cmd.Parameters.Add(new MySqlParameter("2", 5.55));
+            cmd.Parameters.Add(new MySqlParameter("3", "tes"));
+            cmd.ExecuteNonQuery();
         }
     }
 }
