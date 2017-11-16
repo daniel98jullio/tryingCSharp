@@ -7,6 +7,12 @@ namespace Una.sale
         {
         }
 
+        static void Main(string[] args)
+        {
+            MysqlConnection sql = new MysqlConnection();
+            Console.ReadKey();
+        }
+
         public void emitir_cupom_fiscal() {
             
         }
