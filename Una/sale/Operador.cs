@@ -17,6 +17,7 @@ namespace Una.sale
 
         private const string SELECT_ALL = "SELECT * FROM OPERADOR;";
         private const string SELECT_NOME = "SELECT * FROM OPERADOR WHERE NOME = @0;";
+        private const string SELECT_NOME_SENHA = "SELECT * FROM OPERADOR WHERE NOME = @0 AND SENHA = @1;";
         private const string INSERT = "INSERT INTO OPERADOR (NOME, SENHA) VALUES (@0, @1);";
         private const string UPDATE = "UPDATE OPERADOR SET SENHA = @0 WHERE ID = @1;";
         private const string DELETE = "DELETE FROM OPERADOR WHERE ID = @0;";
@@ -61,7 +62,25 @@ namespace Una.sale
             return entity;
         }
 
-		public void insert(string nome, string senha)
+        public OperadorEntity busca(string nome, string senha)
+        {
+            this.connection.openConnection();
+            MySqlCommand cmd = new MySqlCommand(SELECT_NOME_SENHA, this.connection.conn);
+            cmd.Parameters.Add(new MySqlParameter("0", nome));
+            cmd.Parameters.Add(new MySqlParameter("1", senha));
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            OperadorEntity entity = new OperadorEntity();
+            while (rdr.Read())
+            {
+                entity.id = rdr.GetInt32(rdr.GetOrdinal("ID"));
+                entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
+                entity.senha = rdr.GetString(rdr.GetOrdinal("SENHA"));
+            }
+            this.connection.closeConnection();
+            return entity;
+        }
+
+        public void insert(string nome, string senha)
 		{
             this.connection.openConnection();
             MySqlCommand cmd = new MySqlCommand(INSERT, this.connection.conn);
@@ -90,8 +109,9 @@ namespace Una.sale
             this.connection.closeConnection();
         }
 
-        public bool validaUsuario(string name, string senha) {
-            return false;
+        public bool validaUsuario(string nome, string senha) {
+            var usuario = this.busca(nome, senha);
+            return usuario.id > 0 ? true : false;
         }
     }
 }

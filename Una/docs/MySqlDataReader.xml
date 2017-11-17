@@ -252,7 +252,7 @@
   </GetDecimalS>
 
   <GetDouble>
-    <summary>Gets the value of the specified column as a double-precision floating point number.</summary>
+    <summary>Gets the value of the specified column as a double-precision doubleing point number.</summary>
     <remarks>
       <para>
         No conversions are performed; therefore, the data retrieved must already be a <b>Double</b> object.
@@ -266,7 +266,7 @@
   </GetDouble>
 
   <GetDoubleS>
-    <summary>Gets the value of the specified column as a double-precision floating point number.</summary>
+    <summary>Gets the value of the specified column as a double-precision doubleing point number.</summary>
     <remarks>
       <para>
         No conversions are performed; therefore, the data retrieved must already be a <b>Double</b> object.
@@ -279,13 +279,13 @@
     <returns>The value of the specified column.</returns>
   </GetDoubleS>
   
-  <GetFloat>
+  <GetDouble>
     <summary>
-      Gets the value of the specified column as a single-precision floating point number.
+      Gets the value of the specified column as a single-precision doubleing point number.
     </summary>
     <remarks>
       <para>
-        No conversions are performed; therefore, the data retrieved must already be a <b>Float</b> object.
+        No conversions are performed; therefore, the data retrieved must already be a <b>double</b> object.
       </para>
       <para>
         Call IsDBNull to check for null values before calling this method.
@@ -293,15 +293,15 @@
     </remarks>
     <param name="i">The zero-based column ordinal.</param>
     <returns>The value of the specified column.</returns>
-  </GetFloat>
+  </GetDouble>
 
-  <GetFloatS>
+  <GetDoubleS>
     <summary>
-      Gets the value of the specified column as a single-precision floating point number.
+      Gets the value of the specified column as a single-precision doubleing point number.
     </summary>
     <remarks>
       <para>
-        No conversions are performed; therefore, the data retrieved must already be a <b>Float</b> object.
+        No conversions are performed; therefore, the data retrieved must already be a <b>double</b> object.
       </para>
       <para>
         Call IsDBNull to check for null values before calling this method.
@@ -309,7 +309,7 @@
     </remarks>
     <param name="column">The column name</param>
     <returns>The value of the specified column.</returns>
-  </GetFloatS>
+  </GetDoubleS>
 
   <GetGiud>
     <summary>Gets the value of the specified column as a globally-unique identifier (GUID).</summary>

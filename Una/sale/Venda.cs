@@ -8,9 +8,9 @@ namespace Una.sale
     {
         public int id { get; set; }
         public int codBar { get; set; }
-        public float quant { get; set; }
-        public float vrDesc { get; set; }
-        public float vrTot { get; set; }
+        public double quant { get; set; }
+        public double vrDesc { get; set; }
+        public double vrTot { get; set; }
     }
 
     public class Venda
@@ -39,9 +39,9 @@ namespace Una.sale
                 VendaEntity entity = new VendaEntity();
                 entity.id = rdr.GetInt32(rdr.GetOrdinal("ID"));
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
-                entity.quant = rdr.GetFloat(rdr.GetOrdinal("QUANT"));
-                entity.vrDesc = rdr.GetFloat(rdr.GetOrdinal("VR_DESC"));
-                entity.vrTot = rdr.GetFloat(rdr.GetOrdinal("VR_TOT"));
+                entity.quant = rdr.GetDouble(rdr.GetOrdinal("QUANT"));
+                entity.vrDesc = rdr.GetDouble(rdr.GetOrdinal("VR_DESC"));
+                entity.vrTot = rdr.GetDouble(rdr.GetOrdinal("VR_TOT"));
                 vendaList.Add(entity);
             }
             this.connection.closeConnection();
@@ -59,16 +59,16 @@ namespace Una.sale
                 VendaEntity entity = new VendaEntity();
                 entity.id = rdr.GetInt32(rdr.GetOrdinal("ID"));
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
-                entity.quant = rdr.GetFloat(rdr.GetOrdinal("QUANT"));
-                entity.vrDesc = rdr.GetFloat(rdr.GetOrdinal("VR_DESC"));
-                entity.vrTot = rdr.GetFloat(rdr.GetOrdinal("VR_TOT"));
+                entity.quant = rdr.GetDouble(rdr.GetOrdinal("QUANT"));
+                entity.vrDesc = rdr.GetDouble(rdr.GetOrdinal("VR_DESC"));
+                entity.vrTot = rdr.GetDouble(rdr.GetOrdinal("VR_TOT"));
                 vendaList.Add(entity);
             }
             this.connection.closeConnection();
             return vendaList;
         }
 
-        public void insert(int codBar, float qt, float vrDesc, float vrTot) {
+        public void insert(int codBar, double qt, double vrDesc, double vrTot) {
             this.connection.openConnection();
             MySqlCommand cmd = new MySqlCommand(INSERT, this.connection.conn);
             cmd.Parameters.Add(new MySqlParameter("0", codBar));
@@ -95,10 +95,5 @@ namespace Una.sale
             cmd.ExecuteNonQuery();
             this.connection.closeConnection();
         }
-
-		public double calcular_valor_do_item(int codBar, double qtDesej)
-		{
-			return 0;
-		}
     }
 }

@@ -7,7 +7,7 @@ namespace Una.sale
     public class EstoqueEntity
     {
         public int id { get; set; }
-        public float quant { get; set; }
+        public double quant { get; set; }
         public int codBar { get; set; }
         public char idEntrSaid { get; set; }
     }
@@ -39,7 +39,7 @@ namespace Una.sale
                 entity.id = rdr.GetInt32(rdr.GetOrdinal("ID"));
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
                 entity.idEntrSaid = rdr.GetChar(rdr.GetOrdinal("ID_ENTR_SAID"));
-                entity.quant = rdr.GetFloat(rdr.GetOrdinal("QUANT"));
+                entity.quant = rdr.GetDouble(rdr.GetOrdinal("QUANT"));
                 estoqueList.Add(entity);
             }
             this.connection.closeConnection();
@@ -58,7 +58,7 @@ namespace Una.sale
                 entity.id = rdr.GetInt32(rdr.GetOrdinal("ID"));
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
                 entity.idEntrSaid = rdr.GetChar(rdr.GetOrdinal("ID_ENTR_SAID"));
-                entity.quant = rdr.GetFloat(rdr.GetOrdinal("QUANT"));
+                entity.quant = rdr.GetDouble(rdr.GetOrdinal("QUANT"));
             }
             this.connection.closeConnection();
             return entity;
@@ -92,18 +92,6 @@ namespace Una.sale
             cmd.Parameters.Add(new MySqlParameter("0", id));
             cmd.ExecuteNonQuery();
             this.connection.closeConnection();
-        }
-
-        public bool Validar_Quantidade_Estoque(int codBar, double qtDesej) {
-            return false;
-        }
-
-        public void Atualizar_Estoque(int codBar, double qtProd) {
-            
-        }
-
-        public void relatorioQtEstoque() {
-            
         }
     }
 }

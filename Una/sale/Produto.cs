@@ -10,7 +10,7 @@ namespace Una.sale
         public int codBar { get; set; }
         public string nome { get; set; }
         public string descricao { get; set; }
-        public float vrUnit { get; set; }
+        public double vrUnit { get; set; }
     }
 
     public class Produto
@@ -42,7 +42,7 @@ namespace Una.sale
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
                 entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
                 entity.descricao = rdr.GetString(rdr.GetOrdinal("DESCRICAO"));
-                entity.vrUnit = rdr.GetFloat(rdr.GetOrdinal("VR_UNIT"));
+                entity.vrUnit = rdr.GetDouble(rdr.GetOrdinal("VR_UNIT"));
                 produtoList.Add(entity);
             }
             this.connection.closeConnection();
@@ -62,7 +62,7 @@ namespace Una.sale
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
                 entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
                 entity.descricao = rdr.GetString(rdr.GetOrdinal("DESCRICAO"));
-                entity.vrUnit = rdr.GetFloat(rdr.GetOrdinal("VR_UNIT"));
+                entity.vrUnit = rdr.GetDouble(rdr.GetOrdinal("VR_UNIT"));
             }
             this.connection.closeConnection();
             return entity;
@@ -82,7 +82,7 @@ namespace Una.sale
                 entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
                 entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
                 entity.descricao = rdr.GetString(rdr.GetOrdinal("DESCRICAO"));
-                entity.vrUnit = rdr.GetFloat(rdr.GetOrdinal("VR_UNIT"));
+                entity.vrUnit = rdr.GetDouble(rdr.GetOrdinal("VR_UNIT"));
                 produtoList.Add(entity);
             }
             this.connection.closeConnection();
