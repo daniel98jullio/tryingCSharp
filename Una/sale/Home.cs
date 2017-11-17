@@ -25,6 +25,7 @@ namespace Una.sale
             // this.login();
             this.menu();
 
+            Console.WriteLine("|| Obrigado e volte sempre!");
             Console.ReadKey();
         }
 
@@ -58,33 +59,34 @@ namespace Una.sale
 
         private void menu()
         {
-            this.writeHeader();
-            Console.WriteLine("============ Menu ================");
-            Console.WriteLine("|| 1) Cadastro de produto");
-            Console.WriteLine("|| 2) Cadastro de venda");
-            Console.WriteLine("|| 3) Entrada no estoque");
-            Console.WriteLine("|| 9) Cadastro de operador");
-            Console.WriteLine("|| 0) Sair");
-            Console.Write("|| Selecione uma das opções ");
-            int opcao = int.Parse(Console.ReadLine());
-
-            switch (opcao)
+            int opcao = 0;
+            do
             {
-                case 1:
-                    this.cadastroProduto();
-                    break;
-                case 2:
-                    this.cadastroVenda();
-                    break;
-                case 9:
-                    this.cadastroOperador();
-                    break;
-                case 0:
-                    Environment.Exit(0);
-                    break;
-                default:
-                    break;
-            }
+                this.writeHeader();
+                Console.WriteLine("============ Menu ================");
+                Console.WriteLine("|| 1) Cadastro de produto");
+                Console.WriteLine("|| 2) Cadastro de venda");
+                Console.WriteLine("|| 3) Entrada no estoque");
+                Console.WriteLine("|| 9) Cadastro de operador");
+                Console.WriteLine("|| 0) Sair");
+                Console.Write("|| Selecione uma das opções ");
+                opcao = int.Parse(Console.ReadLine());
+
+                switch (opcao)
+                {
+                    case 1:
+                        this.cadastroProduto();
+                        break;
+                    case 2:
+                        this.cadastroVenda();
+                        break;
+                    case 9:
+                        this.cadastroOperador();
+                        break;
+                    default:
+                        break;
+                }
+            } while (opcao > 0);
         }
 
         private void cadastroProduto()
