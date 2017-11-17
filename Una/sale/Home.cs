@@ -12,9 +12,9 @@ namespace Una.sale
             Operador operador = new Operador(conn);
             Produto produto = new Produto(conn);
 
-            var a = estoque.busca();
+            operador.insert("asf", "asdf");
 
-            Console.ReadKey();
+//            Console.ReadKey();
         }
 
         public void emitir_cupom_fiscal() {

@@ -32,7 +32,7 @@ namespace Una.sale
         public List<ProdutoEntity> busca()
         {
             this.connection.openConnection();
-            List<ProdutoEntity> estoqueList = new List<ProdutoEntity>();
+            List<ProdutoEntity> produtoList = new List<ProdutoEntity>();
             MySqlCommand cmd = new MySqlCommand(SELECT_ALL, this.connection.conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -43,10 +43,10 @@ namespace Una.sale
                 entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
                 entity.descricao = rdr.GetString(rdr.GetOrdinal("DESCRICAO"));
                 entity.vrUnit = rdr.GetFloat(rdr.GetOrdinal("VR_UNIT"));
-                estoqueList.Add(entity);
+                produtoList.Add(entity);
             }
             this.connection.closeConnection();
-            return estoqueList;
+            return produtoList;
         }
 
         public ProdutoEntity busca(int codBar)
@@ -71,7 +71,7 @@ namespace Una.sale
 		public List<ProdutoEntity> busca(string nome)
 		{
             this.connection.openConnection();
-            List<ProdutoEntity> estoqueList = new List<ProdutoEntity>();
+            List<ProdutoEntity> produtoList = new List<ProdutoEntity>();
             MySqlCommand cmd = new MySqlCommand(SELECT_NOME, this.connection.conn);
             cmd.Parameters.Add(new MySqlParameter("0", nome));
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -83,10 +83,10 @@ namespace Una.sale
                 entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
                 entity.descricao = rdr.GetString(rdr.GetOrdinal("DESCRICAO"));
                 entity.vrUnit = rdr.GetFloat(rdr.GetOrdinal("VR_UNIT"));
-                estoqueList.Add(entity);
+                produtoList.Add(entity);
             }
             this.connection.closeConnection();
-            return estoqueList;
+            return produtoList;
         }
 
         public void insert(int codBar, string nome, string descricao, double vrUnit)
