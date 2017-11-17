@@ -113,15 +113,21 @@ namespace Una.sale
             Console.Write("|| Quantidade: ");
             double qt = double.Parse(Console.ReadLine());
 
-            this.Validar_Quantidade_Estoque(codBar, qt);
+            bool estaDisponivel = this.Validar_Quantidade_Estoque(codBar, qt);
+            if (estaDisponivel)
+            {
+                double vrDesc = 0;
+                double vrTot = vrDesc = this.calcular_valor_do_item(codBar, qt);
+                vrTot = this.calcular_valor_desconto_forma_pagamento(vrTot);
+                Console.Write("|| O valor total à pagar é: " + vrTot);
+                vrDesc -= vrTot;
 
-            double vrDesc = 0;
-            double vrTot = vrDesc = this.calcular_valor_do_item(codBar, qt);
-            vrTot = this.calcular_valor_desconto_forma_pagamento(vrTot);
-            Console.Write("|| O valor total à pagar é: " + vrTot);
-            vrDesc -= vrTot;
-
-            this.venda.insert(codBar, qt, vrDesc, vrTot);
+                this.venda.insert(codBar, qt, vrDesc, vrTot);
+                this.Atualizar_Estoque(codBar, qt);
+            } else
+            {
+                Console.WriteLine("|| Quantidade desejada não esta disponível em estoque.");
+            }
         }
 
         private void cadastroOperador()
@@ -169,12 +175,26 @@ namespace Una.sale
 
         public bool Validar_Quantidade_Estoque(int codBar, double qtDesej)
         {
-            return false;
+            var estoqueList = this.estoque.busca(codBar, 'E');
+            double vrEntrada = 0;
+            foreach (var item in estoqueList)
+            {
+                vrEntrada += item.quant;
+            }
+
+            estoqueList = this.estoque.busca(codBar, 'S');
+            double vrSaida = 0;
+            foreach (var item in estoqueList)
+            {
+                vrSaida += item.quant;
+            }
+
+            return (vrEntrada - vrSaida) > qtDesej;
         }
 
-        public void Atualizar_Estoque(int codBar, double qtProd)
+        public void Atualizar_Estoque(int codBar, double qt)
         {
-
+            this.estoque.insert(codBar, qt, 'S');
         }
 
         public void relatorioQtEstoque()
