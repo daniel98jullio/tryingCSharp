@@ -94,7 +94,7 @@ namespace Una.sale
             MySqlCommand cmd = new MySqlCommand(INSERT, this.connection.conn);
             cmd.Parameters.Add(new MySqlParameter("0", codBar));
             cmd.Parameters.Add(new MySqlParameter("1", idEntrSaid));
-            cmd.Parameters.Add(new MySqlParameter("2", quant));
+            cmd.Parameters.Add(new MySqlParameter("2", Math.Round(quant, 2)));
             cmd.ExecuteNonQuery();
             this.connection.closeConnection();
         }
@@ -103,7 +103,7 @@ namespace Una.sale
 		{
             this.connection.openConnection();
             MySqlCommand cmd = new MySqlCommand(UPDATE, this.connection.conn);
-            cmd.Parameters.Add(new MySqlParameter("0", quant));
+            cmd.Parameters.Add(new MySqlParameter("0", Math.Round(quant, 2)));
             cmd.Parameters.Add(new MySqlParameter("1", id));
             cmd.ExecuteNonQuery();
             this.connection.closeConnection();

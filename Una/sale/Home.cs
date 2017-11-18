@@ -107,29 +107,42 @@ namespace Una.sale
 
         private void cadastroVenda()
         {
-            this.writeHeader();
-            Console.WriteLine("====== Cadastro de venda =======");
-            Console.WriteLine("|| Informe...");
-            Console.Write("|| Código de barra: ");
-            int codBar = int.Parse(Console.ReadLine());
-            Console.Write("|| Quantidade: ");
-            double qt = double.Parse(Console.ReadLine());
-
-            bool estaDisponivel = this.Validar_Quantidade_Estoque(codBar, qt);
-            if (estaDisponivel)
+            bool continuarCad = false;
+            int newId = venda.nextId();
+            double vrTotVend = 0;
+            do
             {
-                double vrDesc = 0;
-                double vrTot = vrDesc = this.calcular_valor_do_item(codBar, qt);
-                vrTot = this.calcular_valor_desconto_forma_pagamento(vrTot);
-                Console.Write("|| O valor total à pagar é: " + vrTot);
-                vrDesc -= vrTot;
+                this.writeHeader();
+                Console.WriteLine("====== Cadastro de venda =======");
+                Console.WriteLine("|| Informe...");
+                Console.Write("|| Código de barra: ");
+                int codBar = int.Parse(Console.ReadLine());
+                Console.Write("|| Quantidade: ");
+                double qt = double.Parse(Console.ReadLine());
 
-                this.venda.insert(codBar, qt, vrDesc, vrTot);
-                this.Atualizar_Estoque(codBar, qt);
-            } else
-            {
-                Console.WriteLine("|| Quantidade desejada não esta disponível em estoque.");
-            }
+                bool estaDisponivel = this.Validar_Quantidade_Estoque(codBar, qt);
+                if (estaDisponivel)
+                {
+                    double vrDesc = 0;
+                    double vrTot = vrDesc = this.calcular_valor_do_item(codBar, qt);
+                    vrTot = this.calcular_valor_desconto_forma_pagamento(vrTot);
+                    vrDesc -= vrTot;
+                    vrTotVend += vrTot;
+
+                    this.venda.insert(newId, codBar, qt, vrDesc, vrTot);
+                    this.Atualizar_Estoque(codBar, qt);
+                }
+                else
+                {
+                    Console.WriteLine("|| Quantidade desejada não esta disponível em estoque.");
+                }
+                Console.Write("|| Deseja cadastrar outro produto? (S - 'Sim' | N - 'Não') ");
+                continuarCad = Console.ReadLine().ToUpper() == "S";
+            } while (continuarCad);
+            Console.WriteLine("|| O valor total à pagar é: " + vrTotVend);
+            this.emitir_cupom_fiscal(newId);
+            Console.Write("|| Voltar ao menu.");
+            Console.ReadKey();
         }
 
         private void cadastroOperador()
@@ -144,8 +157,20 @@ namespace Una.sale
             this.operador.insert(nome, senha);
         }
 
-        public void emitir_cupom_fiscal() {
-            
+        public void emitir_cupom_fiscal(int idVenda) {
+            var produtos = venda.cupomFiscal(idVenda);
+            if (produtos.Count > 0)
+            {
+                Console.WriteLine("       ==============================================================");
+                Console.WriteLine("                              CUPOM FISCAL                         ");
+                Console.WriteLine("       ==============================================================");
+                Console.WriteLine("       || CODIGO ||    DESCRIÇÃO     || QUANT || VR UNIT || VR TOT ||");
+                foreach (var item in produtos)
+                {
+                    Console.WriteLine("       || {0} || {1} || {2} || {3} || {4} ||", item.codBar, item.nome, item.quant, item.vrUnit, item.vrTot);
+                }
+                Console.WriteLine("       ==============================================================");
+            }
         }
 
         public double calcular_valor_desconto_forma_pagamento(double vrTot) {
@@ -199,9 +224,9 @@ namespace Una.sale
             this.estoque.insert(codBar, qt, 'S');
         }
 
-        public void relatorioQtEstoque()
+        public void relatorioQtEstoque(int idVenda)
         {
-
+            
         }
     }
 }
