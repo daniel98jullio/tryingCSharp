@@ -12,6 +12,15 @@ namespace Una.sale
         public char idEntrSaid { get; set; }
     }
 
+    public class EstoqueProdutoEntity
+    {
+        public int id { get; set; }
+        public int codBar { get; set; }
+        public double quant { get; set; }
+        public string nome { get; set; }
+        public char idEntrSaid { get; set; }
+    }
+
     public class Estoque
     {
         private Connection connection;
@@ -21,7 +30,7 @@ namespace Una.sale
         private const string INSERT = "INSERT INTO ESTOQUE (COD_BAR, ID_ENTR_SAID, QUANT) VALUES (@0, @1, @2);";
         private const string UPDATE = "UPDATE ESTOQUE SET QUANT = @0 WHERE ID = @1;";
         private const string DELETE = "DELETE FROM ESTOQUE WHERE ID = @0;";
-        private const string REPORT_QT_EST = "select E.COD_BAR, P.NOME, SUM(QUANT) from ESTOQUE E, PRODUTO P WHERE P.COD_BAR = E.COD_BAR AND E.COD_BAR = '1' AND ID_ENTR_SAID = @0 GROUP BY COD_BAR, NOME;";
+        private const string REPORT_QT_EST = "SELECT E.COD_BAR, P.NOME, SUM(E.QUANT) QUANT, E.ID_ENTR_SAID from ESTOQUE E, PRODUTO P WHERE P.COD_BAR = E.COD_BAR GROUP BY COD_BAR, NOME, ID_ENTR_SAID ORDER BY E.COD_BAR, E.ID_ENTR_SAID;";
 
         public Estoque(Connection conn)
         {
@@ -116,6 +125,25 @@ namespace Una.sale
             cmd.Parameters.Add(new MySqlParameter("0", id));
             cmd.ExecuteNonQuery();
             this.connection.closeConnection();
+        }
+
+        public List<EstoqueProdutoEntity> fluxoEstoque()
+        {
+            this.connection.openConnection();
+            List<EstoqueProdutoEntity> estoqueList = new List<EstoqueProdutoEntity>();
+            MySqlCommand cmd = new MySqlCommand(REPORT_QT_EST, this.connection.conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                EstoqueProdutoEntity entity = new EstoqueProdutoEntity();
+                entity.codBar = rdr.GetInt32(rdr.GetOrdinal("COD_BAR"));
+                entity.nome = rdr.GetString(rdr.GetOrdinal("NOME"));
+                entity.quant = rdr.GetDouble(rdr.GetOrdinal("QUANT"));
+                entity.idEntrSaid = rdr.GetChar(rdr.GetOrdinal("ID_ENTR_SAID"));
+                estoqueList.Add(entity);
+            }
+            this.connection.closeConnection();
+            return estoqueList;
         }
     }
 }

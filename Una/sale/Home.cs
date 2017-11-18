@@ -67,6 +67,7 @@ namespace Una.sale
                 Console.WriteLine("|| 1) Cadastro de produto");
                 Console.WriteLine("|| 2) Cadastro de venda");
                 Console.WriteLine("|| 3) Entrada no estoque");
+                Console.WriteLine("|| 4) Relatório de estoque");
                 Console.WriteLine("|| 9) Cadastro de operador");
                 Console.WriteLine("|| 0) Sair");
                 Console.Write("|| Selecione uma das opções ");
@@ -79,6 +80,9 @@ namespace Una.sale
                         break;
                     case 2:
                         this.cadastroVenda();
+                        break;
+                    case 4:
+                        this.relatorioQtEstoque();
                         break;
                     case 9:
                         this.cadastroOperador();
@@ -224,9 +228,23 @@ namespace Una.sale
             this.estoque.insert(codBar, qt, 'S');
         }
 
-        public void relatorioQtEstoque(int idVenda)
-        {
-            
+        public void relatorioQtEstoque()
+        {   
+            var estoqList = estoque.fluxoEstoque();
+            this.writeHeader();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("                       FLUXO DE ESTOQUE                         ");
+            Console.WriteLine("================================================================");
+            Console.WriteLine("|| CODIGO ||    NOME     || QUANT || TIPO ||");
+            foreach (var item in estoqList)
+            {
+                string tipo = item.idEntrSaid == 'E' ? "Entrada" : "Saida";
+                Console.WriteLine("|| {0} || {1} || {2} || {3} ||", item.codBar, item.nome, item.quant, tipo);
+
+            }
+            Console.WriteLine("================================================================");
+            Console.Write("|| Voltar ao menu.");
+            Console.ReadKey();
         }
     }
 }
