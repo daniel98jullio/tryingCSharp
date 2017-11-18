@@ -22,7 +22,7 @@ namespace Una.sale
             this.operador = new Operador(conn);
             this.produto = new Produto(conn);
 
-            // this.login();
+            this.login();
             this.menu();
 
             Console.WriteLine("|| Obrigado e volte sempre!");
@@ -80,6 +80,9 @@ namespace Una.sale
                         break;
                     case 2:
                         this.cadastroVenda();
+                        break;
+                    case 3:
+                        this.cadastroEstoque();
                         break;
                     case 4:
                         this.relatorioQtEstoque();
@@ -244,6 +247,20 @@ namespace Una.sale
             }
             Console.WriteLine("================================================================");
             Console.Write("|| Voltar ao menu.");
+            Console.ReadKey();
+        }
+
+        public void cadastroEstoque()
+        {
+            this.writeHeader();
+            Console.WriteLine("====== Entrada no estoque =======");
+            Console.WriteLine("|| Informe...");
+            Console.Write("|| Código de Barra: ");
+            int codBar = int.Parse(Console.ReadLine());
+            Console.Write("|| Quantidade: ");
+            double quantidade = double.Parse(Console.ReadLine());
+            this.estoque.insert(codBar, quantidade, 'E');
+            Console.Write("|| Produto adicionado ao estoque. Voltar ao menu...");
             Console.ReadKey();
         }
     }
