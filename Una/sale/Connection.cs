@@ -6,7 +6,7 @@ namespace Una.sale
 {
     public class Connection
     {
-        private const string CONNECTION = "server=localhost;database=PAH;uid=root;pwd=root";
+        private const string CONNECTION = "server=localhost;database=SALE;uid=root;pwd=root";
         public MySqlConnection conn;
 
         public Connection()
