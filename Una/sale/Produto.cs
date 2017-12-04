@@ -104,7 +104,7 @@ namespace Una.sale
 		public void update(string nome, string descricao, double vrUnit, int id)
 		{
             this.connection.openConnection();
-            MySqlCommand cmd = new MySqlCommand(INSERT, this.connection.conn);
+            MySqlCommand cmd = new MySqlCommand(UPDATE, this.connection.conn);
             cmd.Parameters.Add(new MySqlParameter("0", nome));
             cmd.Parameters.Add(new MySqlParameter("1", descricao));
             cmd.Parameters.Add(new MySqlParameter("2", Math.Round(vrUnit, 2)));
@@ -116,7 +116,7 @@ namespace Una.sale
 		public void delete(int id)
 		{
             this.connection.openConnection();
-            MySqlCommand cmd = new MySqlCommand(INSERT, this.connection.conn);
+            MySqlCommand cmd = new MySqlCommand(DELETE, this.connection.conn);
             cmd.Parameters.Add(new MySqlParameter("0", id));
             cmd.ExecuteNonQuery();
             this.connection.closeConnection();
